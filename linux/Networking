@@ -1,0 +1,37 @@
+To setup the networking:
+
+ip a
+ip addr 
+ip link
+
+
+sudo ip addr flush dev enp7s0
+
+sudo ip addr add 192.168.50.1/24 dev enp7s0
+sudo ip link set enp7s0 up
+
+sudo apt update
+sudo apt install samba
+
+
+mkdir ~/shared
+chmod 777 ~/shared
+
+sudo nano /etc/samba/smb.conf
+
+
+[shared]
+path = /home/yourusername/shared
+browseable = yes
+read only = no
+guest ok = yes
+force user = yourusername
+
+
+sudo systemctl restart smbd
+
+
+\\192.168.0.100\shared
+
+
+systemctl status smbd
